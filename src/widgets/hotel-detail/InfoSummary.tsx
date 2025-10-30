@@ -29,12 +29,12 @@ export function InfoSummary(): React.ReactElement {
             </span>
           </div>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 shrink-0">
           <div className="text-right">
             <div className="text-sm text-zinc-600 dark:text-zinc-400">
               {t("info.review")}
             </div>
-            <div className="text-lg font-semibold text-zinc-900 dark:text-zinc-100 leading-none">
+            <div className="text-lg font-semibold text-zinc-900 dark:text-zinc-100 leading-none shrink-0">
               {t("info.ratingLabel")}
             </div>
           </div>
