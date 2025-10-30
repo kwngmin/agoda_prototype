@@ -3,6 +3,7 @@
 import { useMemo } from "react";
 import { useListingsStore } from "@/src/features/listings/model/listings-store";
 import { restaurants } from "@/src/features/listings/lib/restaurants-data";
+import { CaretDownIcon, CaretUpIcon } from "@phosphor-icons/react";
 
 type Props = {
   className?: string;
@@ -64,9 +65,19 @@ export default function RestaurantList({
                   type="button"
                   onClick={() => toggleExpanded(item.id)}
                   aria-label={expanded ? "접기" : "펼치기"}
-                  className="text-xs px-2 py-1 rounded border hover:bg-gray-50"
+                  className="text-xs px-2 py-1 rounded hover:border hover:bg-gray-50 cursor-pointer"
                 >
-                  {expanded ? "접기" : "펼치기"}
+                  {expanded ? (
+                    <CaretUpIcon
+                      className="size-4 text-gray-800"
+                      weight="bold"
+                    />
+                  ) : (
+                    <CaretDownIcon
+                      className="size-4 text-gray-800"
+                      weight="bold"
+                    />
+                  )}
                 </button>
               </div>
 
