@@ -40,16 +40,26 @@ function GoogleMap({ query }: { query: string }) {
 }
 
 export default function ContentArea({ className }: Props) {
-  const { selectedId, isExpanded } = useListingsStore();
+  const { selectedMainId, selectedSub } = useListingsStore();
   const selected = useMemo(() => {
-    if (!selectedId) return restaurants[0];
-    return restaurants.find((r) => r.id === selectedId) ?? restaurants[0];
-  }, [selectedId]);
+    if (!selectedMainId) return null;
+    return restaurants.find((r) => r.id === selectedMainId) ?? null;
+  }, [selectedMainId]);
 
+  if (!selected) {
+    return (
+      <section className={`w-full h-full ${className ?? ""}`}>
+        <div className="w-full h-full grid place-items-center">
+          <p className="text-sm text-gray-500">목록을 클릭해주세요</p>
+        </div>
+      </section>
+    );
+  }
+
+  const showMap = Boolean(selectedSub);
   return (
-    <section className={`w-full h-[calc(100dvh-64px)] ${className ?? ""}`}>
-      {/* Expanded 상태: 지도, 기본 상태: 유튜브 */}
-      {isExpanded ? (
+    <section className={`w-full h-full ${className ?? ""}`}>
+      {showMap ? (
         <GoogleMap query={selected.mapQuery} />
       ) : (
         <YouTubePlayer videoId={selected.videoId} />

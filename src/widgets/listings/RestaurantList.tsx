@@ -9,51 +9,90 @@ type Props = {
   title?: string;
 };
 
-export default function RestaurantList({ className, title = "Restaurants" }: Props) {
-  const { isExpanded, toggleExpanded, selectItem, selectedId } = useListingsStore();
+export default function RestaurantList({
+  className,
+  title = "식당 목록",
+}: Props) {
+  const {
+    selectedMainId,
+    expandedById,
+    toggleExpanded,
+    selectMain,
+    selectSub,
+  } = useListingsStore();
 
   const items = useMemo(() => restaurants, []);
 
+  const getSubCount = (id: string) => {
+    // deterministic: based on id char codes → 6 or 9 or 12
+    const sum = Array.from(id).reduce((acc, ch) => acc + ch.charCodeAt(0), 0);
+    const mod = sum % 3; // 0,1,2
+    return mod === 0 ? 6 : mod === 1 ? 9 : 12;
+  };
+
   return (
     <aside className={`border-r border-gray-200 ${className ?? ""}`}>
-      <div className="flex items-center justify-between px-4 py-3">
+      {/* <div className="flex items-center justify-between px-4 py-3">
         <h2 className="text-base font-semibold">{title}</h2>
-        <button
-          type="button"
-          onClick={toggleExpanded}
-          className="text-sm text-blue-600 hover:underline"
-          aria-expanded={isExpanded}
-        >
-          {isExpanded ? "접기" : "펼치기"}
-        </button>
-      </div>
+      </div> */}
 
-      <ul className="max-h-[calc(100dvh-140px)] overflow-auto divide-y">
+      <ul className="h-full overflow-auto divide-y divide-gray-200">
         {items.map((item) => {
-          const active = selectedId === item.id;
+          const active = selectedMainId === item.id;
+          const expanded = Boolean(expandedById[item.id]);
+          const count = getSubCount(item.id);
           return (
-            <li key={item.id}>
-              <button
-                type="button"
-                onClick={() => selectItem(item.id)}
-                className={`w-full text-left px-4 py-3 hover:bg-gray-50 focus:bg-gray-50 outline-none ${
+            <li key={item.id} className="group">
+              <div
+                className={`flex items-center gap-2 px-3 py-4 ${
                   active ? "bg-gray-50" : ""
                 }`}
               >
-                <p className="text-sm font-medium">{item.name}</p>
-              </button>
+                <button
+                  type="button"
+                  onClick={() => selectMain(item.id)}
+                  className="flex-1 text-left flex items-center gap-2 cursor-pointer group"
+                >
+                  <span className="inline-flex items-center justify-center rounded-full bg-gray-100 text-gray-500 size-7 text-sm font-semibold ring ring-gray-300">
+                    {count}
+                  </span>
+                  <span className="text-sm font-bold group-hover:underline underline-offset-4">
+                    {item.name}
+                  </span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => toggleExpanded(item.id)}
+                  aria-label={expanded ? "접기" : "펼치기"}
+                  className="text-xs px-2 py-1 rounded border hover:bg-gray-50"
+                >
+                  {expanded ? "접기" : "펼치기"}
+                </button>
+              </div>
+
+              {expanded && (
+                <ul className="px-3 pb-3 space-y-2">
+                  {Array.from({ length: count }).map((_, idx) => (
+                    <li key={idx}>
+                      <button
+                        type="button"
+                        onClick={() => selectSub(item.id, idx)}
+                        className="w-full flex items-center gap-3 rounded border border-gray-400 p-3 bg-gray-50 hover:bg-gray-100 cursor-pointer group active:scale-95 transition-all duration-100 ease-in-out"
+                      >
+                        <div className="h-10 w-10 rounded-full bg-gray-200 animate-pulse" />
+                        <div className="flex-1 space-y-2">
+                          <div className="h-3 w-1/2 bg-gray-200 rounded animate-pulse" />
+                          <div className="h-3 w-1/3 bg-gray-200 rounded animate-pulse" />
+                        </div>
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </li>
           );
         })}
       </ul>
-
-      {isExpanded && (
-        <div className="px-4 py-3 border-t bg-gray-50 text-xs text-gray-600">
-          목록을 펼친 상태에서는 식당 클릭 시 콘텐츠 영역에 구글지도가 표시됩니다.
-        </div>
-      )}
     </aside>
   );
 }
-
-
