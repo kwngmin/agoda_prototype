@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { Skeleton } from "@/src/shared/ui/Skeleton";
 
 /**
  * 아고다 상단과 유사한 컴팩트 검색 바.
@@ -10,7 +9,7 @@ import { Skeleton } from "@/src/shared/ui/Skeleton";
  */
 export function TopSearchBar(): React.ReactElement {
   return (
-    <div className="sticky top-14 z-30 w-full bg-indigo-900 backdrop-blur dark:border-zinc-800 dark:bg-black/50">
+    <div className="sticky top-0 w-full bg-indigo-900 backdrop-blur dark:border-zinc-800 dark:bg-black/50 z-40">
       <div className="mx-auto max-w-6xl px-4 py-3">
         <div className="grid grid-cols-1 gap-2 sm:grid-cols-[1.4fr_1fr_1fr_auto]">
           <label className="group flex items-center gap-3 rounded-md h-12 bg-white px-3 py-2 text-sm shadow-sm ring-offset-0 transition focus-within:border-zinc-300 dark:border-zinc-800 dark:bg-zinc-950 dark:focus-within:border-zinc-700">
