@@ -29,7 +29,8 @@ export type TranslationKey =
   | "search.search"
   | "gallery.viewRooms"
   | "gallery.imageAltMain"
-  | "gallery.imageAltItem";
+  | "gallery.imageAltItem"
+  | "listings.selectPrompt";
 
 type Table = Record<TranslationKey, string>;
 
@@ -72,6 +73,7 @@ export const translations: Record<"ko" | "ja" | "en", Table> = {
     "gallery.viewRooms": "객실 사진 보기",
     "gallery.imageAltMain": "호텔 대표 이미지",
     "gallery.imageAltItem": "호텔 이미지",
+    "listings.selectPrompt": "목록을 클릭해주세요",
   },
   ja: {
     "header.location": "日本・福岡県・福岡市",
@@ -111,6 +113,7 @@ export const translations: Record<"ko" | "ja" | "en", Table> = {
     "gallery.viewRooms": "客室写真を見る",
     "gallery.imageAltMain": "ホテル メイン画像",
     "gallery.imageAltItem": "ホテル画像",
+    "listings.selectPrompt": "リストをクリックしてください",
   },
   en: {
     "header.location": "Japan · Fukuoka Prefecture · Fukuoka",
@@ -150,7 +153,6 @@ export const translations: Record<"ko" | "ja" | "en", Table> = {
     "gallery.viewRooms": "View room photos",
     "gallery.imageAltMain": "Hotel main image",
     "gallery.imageAltItem": "Hotel image",
+    "listings.selectPrompt": "Please click a listing",
   },
 };
-
-

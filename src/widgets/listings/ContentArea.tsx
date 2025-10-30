@@ -3,6 +3,7 @@
 import { useMemo } from "react";
 import { useListingsStore } from "@/src/features/listings/model/listings-store";
 import { restaurants } from "@/src/features/listings/lib/restaurants-data";
+import { useLanguage } from "@/src/shared/i18n/use-language";
 
 type Props = { className?: string };
 
@@ -41,6 +42,7 @@ function GoogleMap({ query }: { query: string }) {
 
 export default function ContentArea({ className }: Props) {
   const { selectedMainId, selectedSub } = useListingsStore();
+  const { t } = useLanguage();
   const selected = useMemo(() => {
     if (!selectedMainId) return null;
     return restaurants.find((r) => r.id === selectedMainId) ?? null;
@@ -50,7 +52,7 @@ export default function ContentArea({ className }: Props) {
     return (
       <section className={`w-full h-full ${className ?? ""}`}>
         <div className="w-full h-full grid place-items-center">
-          <p className="text-sm text-gray-500">목록을 클릭해주세요</p>
+          <p className="text-sm text-gray-500">{t("listings.selectPrompt")}</p>
         </div>
       </section>
     );
@@ -67,5 +69,3 @@ export default function ContentArea({ className }: Props) {
     </section>
   );
 }
-
-

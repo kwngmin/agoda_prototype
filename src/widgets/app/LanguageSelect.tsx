@@ -17,7 +17,7 @@ export default function LanguageSelect(): React.ReactElement {
   return (
     <select
       aria-label="Language"
-      className="ml-auto h-8 rounded-md border border-zinc-200 bg-white px-2 text-xs text-zinc-700 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-200"
+      className="cursor-pointer ml-auto h-8 rounded-md border border-zinc-200 bg-white px-2 text-xs text-zinc-700 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-200"
       value={lang}
       onChange={onChange}
     >
