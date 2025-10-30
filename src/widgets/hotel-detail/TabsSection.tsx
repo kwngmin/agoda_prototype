@@ -36,7 +36,7 @@ export function TabsSection(): React.ReactElement {
         <Link
           href={`/listings?lang=${lang}`}
           target="_blank"
-          className="shrink-0 bg-red-600 text-white font-bold rounded-full px-4 py-2 text-sm cursor-pointer mx-2 hover:bg-red-700"
+          className="shrink-0 bg-blue-600 text-white font-bold rounded-full px-4 py-2 text-sm cursor-pointer mx-2 hover:bg-blue-700"
         >
           {t("tabs.nearby")}
         </Link>

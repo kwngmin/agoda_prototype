@@ -55,7 +55,7 @@ export const translations: Record<"ko" | "ja" | "en", Table> = {
     "tabs.reviews": "이용 후기",
     "tabs.location": "위치",
     "tabs.policy": "정책",
-    "tabs.nearby": "주변정보 보기",
+    "tabs.nearby": "영상으로 주변 보기",
 
     "sticky.lowestPrice": "1박 최저가(세금 포함)",
     "sticky.selectRoom": "객실 선택하기",
