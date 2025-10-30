@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { Skeleton } from "@/src/shared/ui/Skeleton";
+import { useLanguage } from "@/src/shared/i18n/use-language";
 import { NISHITETSU_IMAGES } from "@/src/entities/hotel/mock/nishitetsu-grand-hotel-images";
 
 /**
@@ -9,13 +10,14 @@ import { NISHITETSU_IMAGES } from "@/src/entities/hotel/mock/nishitetsu-grand-ho
  */
 export function Gallery(): React.ReactElement {
   const images = NISHITETSU_IMAGES;
+  const { t } = useLanguage();
   return (
     <section className="mx-auto max-w-6xl gap-2 px-4 pt-3 flex flex-col sm:flex-row">
       <div className="relative overflow-hidden rounded-lg aspect-video w-full sm:w-1/2 lg:w-2/5">
         {images[0] ? (
           <Image
             src={images[0]}
-            alt="호텔 대표 이미지"
+            alt={t("gallery.imageAltMain")}
             fill
             className="object-cover"
             priority
@@ -26,7 +28,7 @@ export function Gallery(): React.ReactElement {
         )}
 
         <div className="absolute bottom-0 left-0 right-0 bg-black/50 text-white text-sm p-2">
-          객실 사진 보기
+          {t("gallery.viewRooms")}
         </div>
       </div>
       <div className="grid grid-cols-3 sm:grid-cols-2 sm:hidden lg:grid lg:grid-cols-3 grid-rows-2 gap-2 grow">
@@ -38,7 +40,7 @@ export function Gallery(): React.ReactElement {
             {images[idx] ? (
               <Image
                 src={images[idx]}
-                alt={`호텔 이미지 ${idx + 1}`}
+                alt={`${t("gallery.imageAltItem")} ${idx + 1}`}
                 fill
                 className="w-full object-cover object-center"
                 // sizes="(max-width: 768px) 50vw, 33vw"
@@ -59,7 +61,7 @@ export function Gallery(): React.ReactElement {
             {images[idx] ? (
               <Image
                 src={images[idx]}
-                alt={`호텔 이미지 ${idx + 1}`}
+                alt={`${t("gallery.imageAltItem")} ${idx + 1}`}
                 fill
                 className="w-full object-cover object-center"
                 // sizes="(max-width: 768px) 50vw, 33vw"
