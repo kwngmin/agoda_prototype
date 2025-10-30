@@ -1,45 +1,49 @@
 "use client";
 
-// 간단한 전역 언어 상태. 라이브러리 미사용, useSyncExternalStore로 구독.
+import { create } from "zustand";
 
 export type AppLanguage = "ko" | "ja" | "en";
 
-let currentLanguage: AppLanguage = "ko";
-const listeners = new Set<() => void>();
+type LanguageState = {
+  lang: AppLanguage;
+  setLang: (lang: AppLanguage) => void;
+};
 
-function emitChange(): void {
-  listeners.forEach((listener) => listener());
-}
+// zustand 전역 스토어
+export const useLangStore = create<LanguageState>((set, get) => ({
+  lang: "ko",
+  setLang: (next) => {
+    if (get().lang !== next) set({ lang: next });
+  },
+}));
 
+// 호환 레이어: 기존 useSyncExternalStore 기반 훅과 동일한 API 제공
 /**
  * 현재 언어를 반환합니다.
  * @returns 현재 설정된 언어 코드
  */
 export function getLanguage(): AppLanguage {
-  return currentLanguage;
+  return useLangStore.getState().lang;
 }
 
 /**
- * 언어를 변경하고 구독자에게 알립니다.
+ * 언어를 변경합니다.
  * @param lang 변경할 언어 코드
  * @returns 변경 후 언어 코드
  */
 export function setLanguage(lang: AppLanguage): AppLanguage {
-  if (currentLanguage !== lang) {
-    currentLanguage = lang;
-    emitChange();
-  }
-  return currentLanguage;
+  useLangStore.getState().setLang(lang);
+  return useLangStore.getState().lang;
 }
 
 /**
- * 외부 저장소 구독을 등록/해제합니다.
+ * 언어 변경을 구독합니다. (언어 값 변경 시에만 콜백 호출)
  * @param cb 변경 콜백
- * @returns 해제 함수
+ * @returns 구독 해제 함수
  */
 export function subscribe(cb: () => void): () => void {
-  listeners.add(cb);
-  return () => listeners.delete(cb);
+  // lang 값 변경에만 반응하도록 prev 비교
+  return useLangStore.subscribe((state, prev) => {
+    if (state.lang !== prev.lang) cb();
+  });
 }
-
-

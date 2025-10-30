@@ -1,9 +1,10 @@
 "use client";
 
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { useListingsStore } from "@/src/features/listings/model/listings-store";
 import { restaurants } from "@/src/features/listings/lib/restaurants-data";
-import { useLanguage } from "@/src/shared/i18n/use-language";
+import { AppLanguage, useLanguage } from "@/src/shared/i18n/use-language";
+import { useSearchParams } from "next/navigation";
 
 type Props = { className?: string };
 
@@ -42,7 +43,16 @@ function GoogleMap({ query }: { query: string }) {
 
 export default function ContentArea({ className }: Props) {
   const { selectedMainId, selectedSub } = useListingsStore();
-  const { t } = useLanguage();
+  const searchParams = useSearchParams();
+  const lang = searchParams.get("lang");
+  const { t, setLang } = useLanguage();
+
+  useEffect(() => {
+    if (lang) {
+      setLang(lang as AppLanguage);
+    }
+  }, [lang, setLang]);
+
   const selected = useMemo(() => {
     if (!selectedMainId) return null;
     return restaurants.find((r) => r.id === selectedMainId) ?? null;

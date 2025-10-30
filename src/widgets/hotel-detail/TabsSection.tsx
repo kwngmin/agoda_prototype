@@ -9,7 +9,7 @@ import { useLanguage } from "@/src/shared/i18n/use-language";
  * @returns 탭 섹션 JSX
  */
 export function TabsSection(): React.ReactElement {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   return (
     <section className="mx-auto max-w-screen-2xl space-y-4">
       <div className="flex items-center overflow-x-auto py-3 border border-zinc-200 px-4 rounded-sm">
@@ -34,7 +34,7 @@ export function TabsSection(): React.ReactElement {
           </button>
         ))}
         <Link
-          href="/listings"
+          href={`/listings?lang=${lang}`}
           target="_blank"
           className="shrink-0 bg-red-600 text-white font-bold rounded-full px-4 py-2 text-sm cursor-pointer mx-2 hover:bg-red-700"
         >
