@@ -29,7 +29,9 @@ export default function RestaurantList({ className }: Props) {
   };
 
   return (
-    <aside className={`border-r border-gray-200 ${className ?? ""}`}>
+    <aside
+      className={`border-r border-gray-200 flex flex-col ${className ?? ""}`}
+    >
       {/* <div className="flex items-center justify-between px-4 py-3">
         <h2 className="text-base font-semibold">{title}</h2>
       </div> */}
@@ -51,7 +53,7 @@ export default function RestaurantList({ className }: Props) {
                   onClick={() => selectMain(item.id)}
                   className="flex-1 text-left flex items-center gap-2 cursor-pointer group"
                 >
-                  <span className="text-xs font-medium text-gray-500 w-4 text-center">
+                  <span className="text-xs font-medium text-gray-500 w-4 text-center shrink-0">
                     {idx + 1}
                   </span>
                   <Image
@@ -64,7 +66,7 @@ export default function RestaurantList({ className }: Props) {
                     width={item.icon === "youtube" ? 20 : 18}
                     height={item.icon === "youtube" ? 20 : 18}
                   />
-                  <span className="text-sm font-bold group-hover:underline underline-offset-4">
+                  <span className="text-sm font-bold group-hover:underline underline-offset-4 line-clamp-1">
                     {item.name}
                   </span>
                   <span className="inline-flex items-center justify-center rounded-full text-amber-600 tracking-tight text-sm font-semibold">
@@ -114,6 +116,17 @@ export default function RestaurantList({ className }: Props) {
           );
         })}
       </ul>
+      <div className="shrink-0 h-18 w-full flex items-center gap-3 px-4 border-t border-gray-200 select-none group">
+        <Image
+          src="/flixovia.png"
+          alt="flixovia logo"
+          width={72}
+          height={100}
+        />
+        <span className="text-sm text-gray-800 group-hover:underline underline-offset-4 cursor-pointer group-hover:text-gray-900">
+          Provided by Flixovia, Inc
+        </span>
+      </div>
     </aside>
   );
 }

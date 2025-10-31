@@ -3,7 +3,7 @@ import type { RestaurantItem } from "@/src/features/listings/model/listings-stor
 export const restaurants: RestaurantItem[] = [
   {
     id: "r1",
-    name: "Sushi Sora",
+    name: "Premium Sushi & Japanese Cuisine Experience",
     videoId: "finLqF_e0qc",
     mapQuery: "Fukuoka%20restaurants",
     icon: "youtube",
@@ -17,14 +17,14 @@ export const restaurants: RestaurantItem[] = [
   },
   {
     id: "r3",
-    name: "Taco Loco",
+    name: "Authentic Mexican Street Food & Margarita Bar",
     videoId: "b4dPKoTRVTM",
     mapQuery: "Fukuoka%10restaurants",
     icon: "youtube",
   },
   {
     id: "r4",
-    name: "Curry House",
+    name: "Traditional Indian Curry House & Spice Market",
     videoId: "gxx1AIpzXNg",
     mapQuery: "Fukuoka%25restaurants",
     icon: "shorts",
@@ -52,7 +52,7 @@ export const restaurants: RestaurantItem[] = [
   },
   {
     id: "r8",
-    name: "Tapas Bar",
+    name: "Mediterranean Tapas Bar & Wine Lounge",
     videoId: "GqP6CmHrEZU",
     mapQuery: "Fukuoka%10restaurants",
     icon: "youtube",
@@ -87,7 +87,7 @@ export const restaurants: RestaurantItem[] = [
   },
   {
     id: "r13",
-    name: "Seafood Bay",
+    name: "Fresh Seafood Bay & Ocean View Restaurant",
     videoId: "0II-qU0ADr4",
     mapQuery: "Fukuoka%30restaurants",
     icon: "youtube",
@@ -115,7 +115,7 @@ export const restaurants: RestaurantItem[] = [
   },
   {
     id: "r17",
-    name: "Paella Place",
+    name: "Authentic Spanish Paella & Iberian Cuisine",
     videoId: "R8Y0B49saOg",
     mapQuery: "Fukuoka%15restaurants",
     icon: "youtube",
@@ -136,7 +136,7 @@ export const restaurants: RestaurantItem[] = [
   },
   {
     id: "r20",
-    name: "Ceviche Co.",
+    name: "Coastal Peruvian Ceviche & Pisco Bar",
     videoId: "KLaIjpC1Uc0",
     mapQuery: "Fukuoka%10restaurants",
     icon: "shorts",
