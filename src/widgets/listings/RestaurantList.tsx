@@ -57,8 +57,8 @@ export default function RestaurantList({ className }: Props) {
                   <Image
                     src={
                       item.icon === "youtube"
-                        ? "/youtube.svg"
-                        : "/youtube_shorts.svg"
+                        ? "/YouTube.svg"
+                        : "/Youtube_shorts.svg"
                     }
                     alt="video icon"
                     width={item.icon === "youtube" ? 20 : 18}
