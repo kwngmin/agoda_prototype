@@ -25,9 +25,9 @@ export const restaurants: RestaurantItem[] = [
   {
     id: "r4",
     name: "Curry House",
-    videoId: "R8Y0B49saOg",
+    videoId: "gxx1AIpzXNg",
     mapQuery: "Fukuoka%25restaurants",
-    icon: "youtube",
+    icon: "shorts",
   },
   {
     id: "r5",
@@ -39,9 +39,9 @@ export const restaurants: RestaurantItem[] = [
   {
     id: "r6",
     name: "Burger Hub",
-    videoId: "tgOLRY0BPCg",
+    videoId: "f9Tx4hdn-aw",
     mapQuery: "Fukuoka%20restaurants",
-    icon: "youtube",
+    icon: "shorts",
   },
   {
     id: "r7",
@@ -60,9 +60,9 @@ export const restaurants: RestaurantItem[] = [
   {
     id: "r9",
     name: "BBQ Pit",
-    videoId: "RF1fqlIzay0",
+    videoId: "Cp9BOPXofsc",
     mapQuery: "Fukuoka%25restaurants",
-    icon: "youtube",
+    icon: "shorts",
   },
   {
     id: "r10",
@@ -95,9 +95,9 @@ export const restaurants: RestaurantItem[] = [
   {
     id: "r14",
     name: "Steak Forge",
-    videoId: "b4dPKoTRVTM",
+    videoId: "DYtIgNmfBBw",
     mapQuery: "Fukuoka%10restaurants",
-    icon: "youtube",
+    icon: "shorts",
   },
   {
     id: "r15",
@@ -123,22 +123,22 @@ export const restaurants: RestaurantItem[] = [
   {
     id: "r18",
     name: "Goulash Haus",
-    videoId: "b4dPKoTRVTM",
+    videoId: "RF1fqlIzay0",
     mapQuery: "Fukuoka%20restaurants",
     icon: "youtube",
   },
   {
     id: "r19",
     name: "Pierogi Point",
-    videoId: "0II-qU0ADr4",
+    videoId: "tgOLRY0BPCg",
     mapQuery: "Fukuoka%30restaurants",
     icon: "youtube",
   },
   {
     id: "r20",
     name: "Ceviche Co.",
-    videoId: "finLqF_e0qc",
+    videoId: "KLaIjpC1Uc0",
     mapQuery: "Fukuoka%10restaurants",
-    icon: "youtube",
+    icon: "shorts",
   },
 ];
