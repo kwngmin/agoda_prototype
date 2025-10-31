@@ -1,10 +1,11 @@
-import { create } from 'zustand';
+import { create } from "zustand";
 
 export type RestaurantItem = {
   id: string;
   name: string;
   videoId: string; // YouTube video id
   mapQuery: string; // Google Maps embed place/query
+  icon: "youtube" | "shorts"; // icon type
 };
 
 type ListingsState = {
@@ -29,13 +30,14 @@ export const useListingsStore = create<ListingsState>((set) => ({
   expandedById: {},
 
   selectMain: (id) => set({ selectedMainId: id, selectedSub: null }),
-  selectSub: (parentId, index) => set({ selectedSub: { parentId, index }, selectedMainId: parentId }),
+  selectSub: (parentId, index) =>
+    set({ selectedSub: { parentId, index }, selectedMainId: parentId }),
   clearSelection: () => set({ selectedMainId: null, selectedSub: null }),
 
   toggleExpanded: (id) =>
-    set((s) => ({ expandedById: { ...s.expandedById, [id]: !s.expandedById[id] } })),
+    set((s) => ({
+      expandedById: { ...s.expandedById, [id]: !s.expandedById[id] },
+    })),
   setExpanded: (id, expanded) =>
     set((s) => ({ expandedById: { ...s.expandedById, [id]: expanded } })),
 }));
-
-

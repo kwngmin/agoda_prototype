@@ -4,16 +4,13 @@ import { useMemo } from "react";
 import { useListingsStore } from "@/src/features/listings/model/listings-store";
 import { restaurants } from "@/src/features/listings/lib/restaurants-data";
 import { CaretDownIcon, CaretUpIcon } from "@phosphor-icons/react";
+import Image from "next/image";
 
 type Props = {
   className?: string;
-  title?: string;
 };
 
-export default function RestaurantList({
-  className,
-  title = "식당 목록",
-}: Props) {
+export default function RestaurantList({ className }: Props) {
   const {
     selectedMainId,
     expandedById,
@@ -60,6 +57,14 @@ export default function RestaurantList({
                   <span className="text-sm font-bold group-hover:underline underline-offset-4">
                     {item.name}
                   </span>
+                  <Image
+                    src={
+                      item.icon === "youtube" ? "/youtube.svg" : "/shorts.svg"
+                    }
+                    alt="video icon"
+                    width={24}
+                    height={24}
+                  />
                 </button>
                 <button
                   type="button"
