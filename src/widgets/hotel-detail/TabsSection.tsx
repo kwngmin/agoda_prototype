@@ -73,7 +73,7 @@ export function TabsSection({
                 weight="bold"
               />
             </div>
-            <div className="flex-1 space-y-1">
+            <div className="flex-1 space-y-0.5 pt-0.5">
               <h3 className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">
                 {t("overview.wifi.title")}
               </h3>
@@ -92,7 +92,7 @@ export function TabsSection({
                 weight="bold"
               />
             </div>
-            <div className="flex-1 space-y-1">
+            <div className="flex-1 space-y-0.5 pt-0.5">
               <h3 className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">
                 {t("overview.parking.title")}
               </h3>
@@ -111,7 +111,7 @@ export function TabsSection({
                 weight="bold"
               />
             </div>
-            <div className="flex-1 space-y-1">
+            <div className="flex-1 space-y-0.5 pt-0.5">
               <h3 className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">
                 {t("overview.checkin.title")}
               </h3>
@@ -130,7 +130,7 @@ export function TabsSection({
                 weight="bold"
               />
             </div>
-            <div className="flex-1 space-y-1">
+            <div className="flex-1 space-y-0.5 pt-0.5">
               <h3 className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">
                 {t("overview.payment.title")}
               </h3>
