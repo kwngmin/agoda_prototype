@@ -80,7 +80,7 @@ export default function RestaurantList({ className }: Props) {
                   type="button"
                   onClick={() => toggleExpanded(item.id)}
                   aria-label={expanded ? "접기" : "펼치기"}
-                  className="text-xs px-2 py-1 rounded hover:border hover:bg-gray-50 cursor-pointer"
+                  className="text-xs px-2 py-1 rounded hover:ring ring-gray-400 hover:bg-gray-50 cursor-pointer"
                 >
                   {expanded ? (
                     <CaretUpIcon
