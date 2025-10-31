@@ -35,14 +35,14 @@ export default function RestaurantList({ className }: Props) {
       </div> */}
 
       <ul className="h-full overflow-auto divide-y divide-gray-200">
-        {items.map((item) => {
+        {items.map((item, idx) => {
           const active = selectedMainId === item.id;
           const expanded = Boolean(expandedById[item.id]);
           const count = getSubCount(item.id);
           return (
             <li key={item.id} className="group">
               <div
-                className={`flex items-center gap-2 px-3 py-4 ${
+                className={`flex items-center gap-2 px-3 h-14 ${
                   active ? "bg-gray-50" : ""
                 }`}
               >
@@ -51,11 +51,8 @@ export default function RestaurantList({ className }: Props) {
                   onClick={() => selectMain(item.id)}
                   className="flex-1 text-left flex items-center gap-2 cursor-pointer group"
                 >
-                  <span className="inline-flex items-center justify-center rounded-full bg-gray-100 text-gray-500 size-7 text-sm font-semibold ring ring-gray-300">
-                    {count}
-                  </span>
-                  <span className="text-sm font-bold group-hover:underline underline-offset-4">
-                    {item.name}
+                  <span className="text-xs font-medium text-gray-500 w-4 text-center">
+                    {idx + 1}
                   </span>
                   <Image
                     src={
@@ -67,6 +64,12 @@ export default function RestaurantList({ className }: Props) {
                     width={item.icon === "youtube" ? 24 : 20}
                     height={item.icon === "youtube" ? 24 : 20}
                   />
+                  <span className="text-sm font-bold group-hover:underline underline-offset-4">
+                    {item.name}
+                  </span>
+                  <span className="inline-flex items-center justify-center rounded-full text-amber-600 size-4 text-sm font-semibold">
+                    {count}
+                  </span>
                 </button>
                 <button
                   type="button"
