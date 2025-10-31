@@ -77,7 +77,7 @@ export function TabsSection({
               <h3 className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">
                 {t("overview.wifi.title")}
               </h3>
-              <p className="text-xs text-zinc-600 dark:text-zinc-400">
+              <p className="text-xs text-zinc-600 dark:text-zinc-400 whitespace-pre-wrap">
                 {t("overview.wifi.description")}
               </p>
             </div>
@@ -96,7 +96,7 @@ export function TabsSection({
               <h3 className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">
                 {t("overview.parking.title")}
               </h3>
-              <p className="text-xs text-zinc-600 dark:text-zinc-400">
+              <p className="text-xs text-zinc-600 dark:text-zinc-400 whitespace-pre-wrap">
                 {t("overview.parking.description")}
               </p>
             </div>
@@ -115,7 +115,7 @@ export function TabsSection({
               <h3 className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">
                 {t("overview.checkin.title")}
               </h3>
-              <p className="text-xs text-zinc-600 dark:text-zinc-400">
+              <p className="text-xs text-zinc-600 dark:text-zinc-400 whitespace-pre-wrap">
                 {t("overview.checkin.description")}
               </p>
             </div>
@@ -134,7 +134,7 @@ export function TabsSection({
               <h3 className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">
                 {t("overview.payment.title")}
               </h3>
-              <p className="text-xs text-zinc-600 dark:text-zinc-400">
+              <p className="text-xs text-zinc-600 dark:text-zinc-400 whitespace-pre-wrap">
                 {t("overview.payment.description")}
               </p>
             </div>
