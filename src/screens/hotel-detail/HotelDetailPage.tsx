@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { HeaderBar } from "@/src/widgets/hotel-detail/HeaderBar";
 import { Gallery } from "@/src/widgets/hotel-detail/Gallery";
 import { StickyBookCard } from "@/src/widgets/hotel-detail/StickyBookCard";
@@ -14,9 +14,18 @@ import { useLanguage } from "@/src/shared/i18n/use-language";
  */
 export default function HotelDetailPage(): React.ReactElement {
   const { t } = useLanguage();
+  const [buttonStyle, setButtonStyle] = useState<"default" | "primary">(
+    "default"
+  );
+
   return (
     <div className="min-h-screen bg-zinc-50 dark:bg-black">
-      <HeaderBar />
+      <HeaderBar
+        buttonStyle={buttonStyle}
+        setButtonStyle={() =>
+          setButtonStyle((prev) => (prev === "default" ? "primary" : "default"))
+        }
+      />
       <TopSearchBar />
       <div className="truncate text-xs text-zinc-500 dark:text-zinc-400 mx-auto max-w-6xl px-4 pt-3 font-medium">
         {t("header.location")}
@@ -24,7 +33,7 @@ export default function HotelDetailPage(): React.ReactElement {
       <Gallery />
       <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 px-4 py-4 lg:grid-cols-[1fr_360px]">
         <div>
-          <TabsSection />
+          <TabsSection buttonStyle={buttonStyle} />
         </div>
         <StickyBookCard />
       </div>

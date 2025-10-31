@@ -8,7 +8,11 @@ import { useLanguage } from "@/src/shared/i18n/use-language";
  * 탭 내 섹션(객실, 편의시설, 위치, 리뷰 등)의 스켈레톤을 간략히 구성합니다.
  * @returns 탭 섹션 JSX
  */
-export function TabsSection(): React.ReactElement {
+export function TabsSection({
+  buttonStyle,
+}: {
+  buttonStyle: "default" | "primary";
+}): React.ReactElement {
   const { t, lang } = useLanguage();
   return (
     <section className="mx-auto max-w-screen-2xl space-y-4">
@@ -27,19 +31,32 @@ export function TabsSection(): React.ReactElement {
             className={`px-4 py-2 text-sm cursor-pointer shrink-0 ${
               label === t("tabs.overview")
                 ? "font-bold border-b-2 border-blue-600  text-blue-700"
-                : "font-medium"
+                : "font-medium hover:text-blue-700"
             }`}
           >
             {label}
           </button>
         ))}
-        <Link
-          href={`/listings?lang=${lang}`}
-          target="_blank"
-          className="shrink-0 bg-red-600 text-white font-bold rounded-full px-4 py-2 text-sm cursor-pointer mx-2 hover:bg-red-700"
-        >
-          {t("tabs.nearby")}
-        </Link>
+        {buttonStyle === "default" ? (
+          <Link
+            href={`/listings?lang=${lang}`}
+            target="_blank"
+            className="px-4 py-2 text-sm cursor-pointer shrink-0 font-medium relative hover:text-blue-700"
+          >
+            {t("tabs.nearby")}
+            <span className="absolute -top-2.5 right-0 bg-red-500 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold">
+              NEW
+            </span>
+          </Link>
+        ) : (
+          <Link
+            href={`/listings?lang=${lang}`}
+            target="_blank"
+            className="shrink-0 bg-red-600 text-white font-bold rounded-full px-4 py-2 text-sm cursor-pointer mx-2 hover:bg-red-700"
+          >
+            {t("tabs.nearby")}
+          </Link>
+        )}
       </div>
       <InfoSummary />
       <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">

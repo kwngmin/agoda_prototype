@@ -3,12 +3,19 @@
 import React from "react";
 import { useLanguage } from "@/src/shared/i18n/use-language";
 import LanguageSelect from "../app/LanguageSelect";
+import { ToggleLeftIcon, ToggleRightIcon } from "@phosphor-icons/react";
 
 /**
  * 호텔 상세 상단 헤더 바(브레드크럼, 호텔명, 평점, 미니 액션들)를 렌더링합니다.
  * @returns 헤더 바 JSX
  */
-export function HeaderBar(): React.ReactElement {
+export function HeaderBar({
+  buttonStyle,
+  setButtonStyle,
+}: {
+  buttonStyle: "default" | "primary";
+  setButtonStyle: () => void;
+}): React.ReactElement {
   const { t } = useLanguage();
   return (
     <header className="sticky top-0 z-40 w-full border-b border-zinc-200 bg-white/90 backdrop-blur dark:border-zinc-800 dark:bg-black/60">
@@ -22,15 +29,28 @@ export function HeaderBar(): React.ReactElement {
           </h1>
         </div>
         <div className="ml-4 hidden items-center gap-3 sm:flex">
-          <div className="rounded-md bg-emerald-50 px-2 py-1 text-xs font-medium text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300">
+          {/* <div className="rounded-md bg-emerald-50 px-2 py-1 text-xs font-medium text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300">
             {t("header.rating")}
-          </div>
-          <button className="rounded-md border border-zinc-200 px-3 py-1.5 text-xs text-zinc-700 transition hover:bg-zinc-50 dark:border-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-900">
+          </div> */}
+          {/* <button className="rounded-md border border-zinc-200 px-3 py-1.5 text-xs text-zinc-700 transition hover:bg-zinc-50 dark:border-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-900">
             {t("header.share")}
           </button>
           <button className="rounded-md border border-zinc-200 px-3 py-1.5 text-xs text-zinc-700 transition hover:bg-zinc-50 dark:border-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-900">
             {t("header.save")}
-          </button>
+          </button> */}
+          {buttonStyle === "primary" ? (
+            <ToggleLeftIcon
+              weight="fill"
+              className="size-10 cursor-pointer text-slate-500"
+              onClick={setButtonStyle}
+            />
+          ) : (
+            <ToggleRightIcon
+              weight="fill"
+              className="size-10 cursor-pointer text-blue-500"
+              onClick={setButtonStyle}
+            />
+          )}
           <LanguageSelect />
         </div>
       </div>
