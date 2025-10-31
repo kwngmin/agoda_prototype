@@ -29,7 +29,7 @@ export function InfoSummary(): React.ReactElement {
             </span>
           </div>
         </div>
-        <div className="flex items-center gap-2 shrink-0">
+        <div className="flex items-center justify-end gap-2 shrink-0">
           <div className="text-right">
             <div className="text-sm text-zinc-600 dark:text-zinc-400">
               {t("info.review")}
