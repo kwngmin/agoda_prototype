@@ -30,7 +30,15 @@ export type TranslationKey =
   | "gallery.viewRooms"
   | "gallery.imageAltMain"
   | "gallery.imageAltItem"
-  | "listings.selectPrompt";
+  | "listings.selectPrompt"
+  | "overview.wifi.title"
+  | "overview.wifi.description"
+  | "overview.parking.title"
+  | "overview.parking.description"
+  | "overview.checkin.title"
+  | "overview.checkin.description"
+  | "overview.payment.title"
+  | "overview.payment.description";
 
 type Table = Record<TranslationKey, string>;
 
@@ -74,6 +82,15 @@ export const translations: Record<"ko" | "ja" | "en", Table> = {
     "gallery.imageAltMain": "호텔 대표 이미지",
     "gallery.imageAltItem": "호텔 이미지",
     "listings.selectPrompt": "목록을 클릭해주세요",
+
+    "overview.wifi.title": "무료 와이파이",
+    "overview.wifi.description": "모든 객실 및 공용 공간에서 이용 가능",
+    "overview.parking.title": "주차 시설",
+    "overview.parking.description": "유료 주차장 이용 가능 (예약 필요)",
+    "overview.checkin.title": "체크인/체크아웃",
+    "overview.checkin.description": "체크인 15:00 | 체크아웃 11:00",
+    "overview.payment.title": "결제 옵션",
+    "overview.payment.description": "신용카드, 현금, 전자결제 모두 이용 가능",
   },
   ja: {
     "header.location": "日本・福岡県・福岡市",
@@ -114,6 +131,15 @@ export const translations: Record<"ko" | "ja" | "en", Table> = {
     "gallery.imageAltMain": "ホテル メイン画像",
     "gallery.imageAltItem": "ホテル画像",
     "listings.selectPrompt": "リストをクリックしてください",
+
+    "overview.wifi.title": "無料Wi-Fi",
+    "overview.wifi.description": "全客室および共用エリアで利用可能",
+    "overview.parking.title": "駐車場",
+    "overview.parking.description": "有料駐車場あり（要予約）",
+    "overview.checkin.title": "チェックイン/アウト",
+    "overview.checkin.description": "チェックイン 15:00 | チェックアウト 11:00",
+    "overview.payment.title": "決済方法",
+    "overview.payment.description": "クレジットカード、現金、電子決済すべて利用可能",
   },
   en: {
     "header.location": "Japan · Fukuoka Prefecture · Fukuoka",
@@ -154,5 +180,14 @@ export const translations: Record<"ko" | "ja" | "en", Table> = {
     "gallery.imageAltMain": "Hotel main image",
     "gallery.imageAltItem": "Hotel image",
     "listings.selectPrompt": "Please click a listing",
+
+    "overview.wifi.title": "Free WiFi",
+    "overview.wifi.description": "Available in all rooms and common areas",
+    "overview.parking.title": "Parking",
+    "overview.parking.description": "Paid parking available (reservation required)",
+    "overview.checkin.title": "Check-in/Check-out",
+    "overview.checkin.description": "Check-in 15:00 | Check-out 11:00",
+    "overview.payment.title": "Payment Options",
+    "overview.payment.description": "Credit cards, cash, and electronic payment all accepted",
   },
 };

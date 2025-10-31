@@ -8,7 +8,7 @@ import { useLanguage } from "@/src/shared/i18n/use-language";
 export function InfoSummary(): React.ReactElement {
   const { t } = useLanguage();
   return (
-    <section className="mx-auto max-w-screen-2xl py-4 border border-zinc-200 px-4 rounded-sm">
+    <section className="mx-auto max-w-screen-2xl py-4 border border-zinc-200 px-4 rounded-sm bg-white">
       <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <h2 className="text-xl font-bold text-zinc-900 dark:text-zinc-100 sm:text-2xl">
