@@ -38,7 +38,8 @@ export type TranslationKey =
   | "overview.checkin.title"
   | "overview.checkin.description"
   | "overview.payment.title"
-  | "overview.payment.description";
+  | "overview.payment.description"
+  | "listings.title";
 
 type Table = Record<TranslationKey, string>;
 
@@ -91,6 +92,7 @@ export const translations: Record<"ko" | "ja" | "en", Table> = {
     "overview.checkin.description": "체크인 15:00 | 체크아웃 11:00",
     "overview.payment.title": "결제 옵션",
     "overview.payment.description": "신용카드, 현금, 전자결제 모두 이용 가능",
+    "listings.title": "목록",
   },
   ja: {
     "header.location": "日本・福岡県・福岡市",
@@ -139,7 +141,9 @@ export const translations: Record<"ko" | "ja" | "en", Table> = {
     "overview.checkin.title": "チェックイン/アウト",
     "overview.checkin.description": "チェックイン 15:00 | チェックアウト 11:00",
     "overview.payment.title": "決済方法",
-    "overview.payment.description": "クレジットカード、現金、電子決済すべて利用可能",
+    "overview.payment.description":
+      "クレジットカード、現金、電子決済すべて利用可能",
+    "listings.title": "リスト",
   },
   en: {
     "header.location": "Japan · Fukuoka Prefecture · Fukuoka",
@@ -184,10 +188,13 @@ export const translations: Record<"ko" | "ja" | "en", Table> = {
     "overview.wifi.title": "Free WiFi",
     "overview.wifi.description": "Available in all rooms and common areas",
     "overview.parking.title": "Parking",
-    "overview.parking.description": "Paid parking available (reservation required)",
+    "overview.parking.description":
+      "Paid parking available (reservation required)",
     "overview.checkin.title": "Check-in/Check-out",
     "overview.checkin.description": "Check-in 15:00 | Check-out 11:00",
     "overview.payment.title": "Payment Options",
-    "overview.payment.description": "Credit cards, cash, and electronic payment all accepted",
+    "overview.payment.description":
+      "Credit cards, cash, and electronic payment all accepted",
+    "listings.title": "List",
   },
 };

@@ -3,8 +3,9 @@
 import { useMemo } from "react";
 import { useListingsStore } from "@/src/features/listings/model/listings-store";
 import { restaurants } from "@/src/features/listings/lib/restaurants-data";
-import { CaretDownIcon, CaretUpIcon } from "@phosphor-icons/react";
+import { CaretDownIcon, CaretUpIcon, ListIcon } from "@phosphor-icons/react";
 import Image from "next/image";
+import { useLanguage } from "@/src/shared/i18n/use-language";
 
 type Props = {
   className?: string;
@@ -19,6 +20,7 @@ export default function RestaurantList({ className }: Props) {
     selectSub,
   } = useListingsStore();
 
+  const { t } = useLanguage();
   const items = useMemo(() => restaurants, []);
 
   const getSubCount = (id: string) => {
@@ -32,9 +34,10 @@ export default function RestaurantList({ className }: Props) {
     <aside
       className={`border-r border-gray-200 flex flex-col ${className ?? ""}`}
     >
-      {/* <div className="flex items-center justify-between px-4 py-3">
-        <h2 className="text-base font-semibold">{title}</h2>
-      </div> */}
+      <div className="flex items-center gap-3 px-4 py-3 shrink-0 h-16 w-full border-b border-gray-200">
+        <ListIcon className="size-5 text-gray-800 shrink-0" weight="bold" />
+        <h2 className="text-base font-semibold">{t("listings.title")}</h2>
+      </div>
 
       <ul className="h-full overflow-auto divide-y divide-gray-200">
         {items.map((item, idx) => {
