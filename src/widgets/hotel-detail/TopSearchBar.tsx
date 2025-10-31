@@ -53,10 +53,13 @@ export function TopSearchBar(): React.ReactElement {
                 className="min-w-0 w-16 bg-transparent text-right outline-none text-base"
               />
             </label>
-            <button className="shrink-0 rounded-md h-12 w-32 bg-blue-400 px-5 text-base font-bold text-white transition hover:bg-blue-500 cursor-pointer dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200">
+            <button className="hidden sm:block shrink-0 rounded-md h-12 w-32 bg-blue-400 px-5 text-base font-bold text-white transition hover:bg-blue-500 cursor-pointer dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200">
               {t("search.search")}
             </button>
           </div>
+          <button className="sm:hidden col-span-2 shrink-0 rounded-md h-12 w-full bg-blue-400 px-5 text-base font-bold text-white transition hover:bg-blue-500 cursor-pointer dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200">
+            {t("search.search")}
+          </button>
         </div>
       </div>
     </div>

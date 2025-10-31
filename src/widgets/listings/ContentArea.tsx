@@ -5,8 +5,9 @@ import { useListingsStore } from "@/src/features/listings/model/listings-store";
 import { restaurants } from "@/src/features/listings/lib/restaurants-data";
 import { AppLanguage, useLanguage } from "@/src/shared/i18n/use-language";
 import { useSearchParams } from "next/navigation";
+import { ListIcon } from "@phosphor-icons/react";
 
-type Props = { className?: string };
+type Props = { className?: string; onToggle: () => void };
 
 function YouTubePlayer({ videoId }: { videoId: string }) {
   const [showFallback, setShowFallback] = useState(false);
@@ -67,7 +68,7 @@ function GoogleMap({ query }: { query: string }) {
   );
 }
 
-export default function ContentArea({ className }: Props) {
+export default function ContentArea({ className, onToggle }: Props) {
   const { selectedMainId, selectedSub } = useListingsStore();
   const searchParams = useSearchParams();
   const lang = searchParams.get("lang");
@@ -87,6 +88,19 @@ export default function ContentArea({ className }: Props) {
   if (!selected) {
     return (
       <section className={`w-full h-full ${className ?? ""}`}>
+        <button
+          type="button"
+          onClick={onToggle}
+          className="flex sm:hidden items-center gap-3 px-4 py-3 shrink-0 h-16 w-full border-b border-gray-200 group select-none cursor-pointer"
+        >
+          <ListIcon
+            className="size-8 text-gray-800 shrink-0 bg-gray-100 rounded-full p-1.5 group-hover:bg-gray-200 transition-colors duration-100 ease-in-out"
+            weight="bold"
+          />
+          <h2 className="text-base font-semibold group-hover:underline underline-offset-4">
+            {t("listings.title")}
+          </h2>
+        </button>
         <div className="w-full h-full grid place-items-center">
           <p className="text-sm text-gray-500">{t("listings.selectPrompt")}</p>
         </div>
@@ -97,6 +111,19 @@ export default function ContentArea({ className }: Props) {
   const showMap = Boolean(selectedSub);
   return (
     <section className={`w-full h-full ${className ?? ""}`}>
+      <button
+        type="button"
+        onClick={onToggle}
+        className="flex sm:hidden items-center gap-3 px-4 py-3 shrink-0 h-16 w-full border-b border-gray-200 group select-none cursor-pointer"
+      >
+        <ListIcon
+          className="size-8 text-gray-800 shrink-0 bg-gray-100 rounded-full p-1.5 group-hover:bg-gray-200 transition-colors duration-100 ease-in-out"
+          weight="bold"
+        />
+        <h2 className="text-base font-semibold group-hover:underline underline-offset-4">
+          {t("listings.title")}
+        </h2>
+      </button>
       {showMap ? (
         <GoogleMap query={selected.mapQuery} />
       ) : (

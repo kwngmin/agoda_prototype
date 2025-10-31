@@ -9,9 +9,15 @@ import { useLanguage } from "@/src/shared/i18n/use-language";
 
 type Props = {
   className?: string;
+  expanded: boolean;
+  onToggle: () => void;
 };
 
-export default function RestaurantList({ className }: Props) {
+export default function RestaurantList({
+  className,
+  expanded,
+  onToggle,
+}: Props) {
   const {
     selectedMainId,
     expandedById,
@@ -32,12 +38,25 @@ export default function RestaurantList({ className }: Props) {
 
   return (
     <aside
-      className={`border-r border-gray-200 flex flex-col ${className ?? ""}`}
+      className={`${
+        expanded ? "flex" : "hidden sm:flex!"
+      } border-r border-gray-200 flex-col w-dvw sm:w-auto bg-white z-20 ${
+        className ?? ""
+      } `}
     >
-      <div className="flex items-center gap-3 px-4 py-3 shrink-0 h-16 w-full border-b border-gray-200">
-        <ListIcon className="size-5 text-gray-800 shrink-0" weight="bold" />
-        <h2 className="text-base font-semibold">{t("listings.title")}</h2>
-      </div>
+      <button
+        type="button"
+        onClick={onToggle}
+        className="flex items-center gap-3 px-4 py-3 shrink-0 h-16 w-full border-b border-gray-200 group select-none cursor-pointer"
+      >
+        <ListIcon
+          className="size-8 text-gray-800 shrink-0 bg-gray-100 rounded-full p-1.5 group-hover:bg-gray-200 transition-colors duration-100 ease-in-out"
+          weight="bold"
+        />
+        <h2 className="text-base font-semibold group-hover:underline underline-offset-4">
+          {t("listings.title")}
+        </h2>
+      </button>
 
       <ul className="h-full overflow-auto divide-y divide-gray-200">
         {items.map((item, idx) => {
@@ -53,7 +72,10 @@ export default function RestaurantList({ className }: Props) {
               >
                 <button
                   type="button"
-                  onClick={() => selectMain(item.id)}
+                  onClick={() => {
+                    selectMain(item.id);
+                    onToggle();
+                  }}
                   className="flex-1 text-left flex items-center gap-2 cursor-pointer group"
                 >
                   <span className="text-xs font-medium text-gray-500 w-4 text-center shrink-0">
@@ -102,7 +124,10 @@ export default function RestaurantList({ className }: Props) {
                     <li key={idx}>
                       <button
                         type="button"
-                        onClick={() => selectSub(item.id, idx)}
+                        onClick={() => {
+                          selectSub(item.id, idx);
+                          onToggle();
+                        }}
                         className="w-full flex items-center gap-3 rounded border border-gray-400 p-3 bg-gray-50 hover:bg-gray-100 cursor-pointer group active:scale-95 transition-all duration-100 ease-in-out"
                       >
                         <div className="h-10 w-10 rounded-full bg-gray-200 animate-pulse" />
