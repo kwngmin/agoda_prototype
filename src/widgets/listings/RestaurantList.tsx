@@ -61,13 +61,13 @@ export default function RestaurantList({ className }: Props) {
                         : "/youtube_shorts.svg"
                     }
                     alt="video icon"
-                    width={item.icon === "youtube" ? 24 : 20}
-                    height={item.icon === "youtube" ? 24 : 20}
+                    width={item.icon === "youtube" ? 20 : 18}
+                    height={item.icon === "youtube" ? 20 : 18}
                   />
                   <span className="text-sm font-bold group-hover:underline underline-offset-4">
                     {item.name}
                   </span>
-                  <span className="inline-flex items-center justify-center rounded-full text-amber-600 size-4 text-sm font-semibold">
+                  <span className="inline-flex items-center justify-center rounded-full text-amber-600 tracking-tight text-sm font-semibold">
                     {count}
                   </span>
                 </button>
