@@ -84,8 +84,8 @@ export default function RestaurantList({
             return (
               <li key={item.id} className="group overflow-hidden">
                 <div
-                  className={`flex items-center gap-2 px-3 h-14 ${
-                    active ? "bg-gray-50" : ""
+                  className={`flex items-center gap-2 px-3 h-16 ${
+                    active ? "bg-gray-100" : ""
                   }`}
                 >
                   <button
@@ -118,7 +118,7 @@ export default function RestaurantList({
                         />
                       </div>
                     )}
-                    <span className="text-sm font-bold group-hover:underline underline-offset-4 truncate min-w-0 flex-1">
+                    <span className="text-sm font-bold group-hover:underline underline-offset-4 line-clamp-2 min-w-0 flex-1 px-1">
                       {item.name}
                     </span>
                     <span className="inline-flex items-center justify-center rounded-full text-amber-600 tracking-tight text-sm font-semibold shrink-0">
