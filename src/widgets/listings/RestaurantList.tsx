@@ -69,7 +69,7 @@ export default function RestaurantList({
         </h2>
       </button>
 
-      <ul className="h-full overflow-auto divide-y divide-gray-200">
+      <ul className="h-full overflow-x-hidden overflow-y-scroll divide-y divide-gray-200">
         {loading ? (
           <li className="px-4 py-8 text-center text-gray-500">로딩 중...</li>
         ) : items.length === 0 ? (
@@ -82,7 +82,7 @@ export default function RestaurantList({
             const expanded = Boolean(expandedById[item.id]);
             const count = item.subItems.length;
             return (
-              <li key={item.id} className="group">
+              <li key={item.id} className="group overflow-hidden">
                 <div
                   className={`flex items-center gap-2 px-3 h-14 ${
                     active ? "bg-gray-50" : ""
@@ -99,16 +99,24 @@ export default function RestaurantList({
                     <span className="text-xs font-medium text-gray-500 w-4 text-center shrink-0">
                       {idx + 1}
                     </span>
-                    <Image
-                      src={
-                        item.icon === "youtube"
-                          ? "/YouTube.svg"
-                          : "/Youtube_shorts.svg"
-                      }
-                      alt="video icon"
-                      width={item.icon === "youtube" ? 20 : 18}
-                      height={item.icon === "youtube" ? 20 : 18}
-                    />
+
+                    {item.icon === "youtube" ? (
+                      <Image
+                        src="/YouTube.svg"
+                        alt="video icon"
+                        width={20}
+                        height={20}
+                      />
+                    ) : (
+                      <div className="flex w-5 justify-center items-center shrink-0">
+                        <Image
+                          src="/Youtube_shorts.svg"
+                          alt="video icon"
+                          width={18}
+                          height={18}
+                        />
+                      </div>
+                    )}
                     <span className="text-sm font-bold group-hover:underline underline-offset-4 line-clamp-1">
                       {item.name}
                     </span>
@@ -148,9 +156,9 @@ export default function RestaurantList({
                           }}
                           className="w-full flex items-center gap-3 rounded border border-gray-400 p-3 bg-gray-50 hover:bg-gray-100 cursor-pointer group active:scale-95 transition-all duration-100 ease-in-out"
                         >
-                          <div className="h-10 w-10 rounded-full bg-gray-200 shrink-0" />
+                          {/* <div className="h-10 w-10 rounded-full bg-gray-200 shrink-0" /> */}
                           <div className="flex-1 flex flex-col space-y-1">
-                            <div className="text-sm font-semibold text-gray-900 text-left">
+                            <div className="text-sm font-bold text-gray-900 text-left">
                               {subItem.name}
                             </div>
                             <div className="text-xs text-gray-600 text-left">
