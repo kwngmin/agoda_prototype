@@ -94,7 +94,7 @@ export default function RestaurantList({
                       selectMain(item.id);
                       onToggle();
                     }}
-                    className="flex-1 text-left flex items-center gap-2 cursor-pointer group"
+                    className="flex-1 text-left flex items-center gap-2 cursor-pointer group min-w-0"
                   >
                     <span className="text-xs font-medium text-gray-500 w-4 text-center shrink-0">
                       {idx + 1}
@@ -106,6 +106,7 @@ export default function RestaurantList({
                         alt="video icon"
                         width={20}
                         height={20}
+                        className="shrink-0"
                       />
                     ) : (
                       <div className="flex w-5 justify-center items-center shrink-0">
@@ -117,10 +118,10 @@ export default function RestaurantList({
                         />
                       </div>
                     )}
-                    <span className="text-sm font-bold group-hover:underline underline-offset-4 line-clamp-1">
+                    <span className="text-sm font-bold group-hover:underline underline-offset-4 truncate min-w-0 flex-1">
                       {item.name}
                     </span>
-                    <span className="inline-flex items-center justify-center rounded-full text-amber-600 tracking-tight text-sm font-semibold">
+                    <span className="inline-flex items-center justify-center rounded-full text-amber-600 tracking-tight text-sm font-semibold shrink-0">
                       {count}
                     </span>
                   </button>
