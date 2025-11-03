@@ -8,7 +8,7 @@ export default function ListingsPage() {
   const [expanded, setExpanded] = useState(true);
 
   return (
-    <div className="grid sm:grid-cols-[360px_minmax(0,1fr)] h-dvh overflow-hidden">
+    <div className="grid sm:grid-cols-[320px_minmax(0,1fr)] lg:grid-cols-[360px_minmax(0,1fr)] xl:grid-cols-[420px_minmax(0,1fr)] h-dvh overflow-hidden">
       <RestaurantList
         className="h-dvh"
         expanded={expanded}
