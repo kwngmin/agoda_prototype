@@ -64,7 +64,7 @@ export const translations: Record<"ko" | "ja" | "en", Table> = {
     "tabs.reviews": "이용 후기",
     "tabs.location": "위치",
     "tabs.policy": "정책",
-    "tabs.nearby": "영상으로 주변 보기",
+    "tabs.nearby": "추천 영상 보기",
 
     "sticky.lowestPrice": "1박 최저가(세금 포함)",
     "sticky.selectRoom": "객실 선택하기",
@@ -114,7 +114,7 @@ export const translations: Record<"ko" | "ja" | "en", Table> = {
     "tabs.reviews": "クチコミ",
     "tabs.location": "ロケーション",
     "tabs.policy": "ポリシー",
-    "tabs.nearby": "周辺情報を見る",
+    "tabs.nearby": "おすすめ動画を見る",
 
     "sticky.lowestPrice": "1泊の最安値(税込)",
     "sticky.selectRoom": "客室を選択",
@@ -165,7 +165,7 @@ export const translations: Record<"ko" | "ja" | "en", Table> = {
     "tabs.reviews": "Reviews",
     "tabs.location": "Location",
     "tabs.policy": "Policy",
-    "tabs.nearby": "View nearby",
+    "tabs.nearby": "View recommended videos",
 
     "sticky.lowestPrice": "Lowest price per night (tax incl.)",
     "sticky.selectRoom": "Select room",
