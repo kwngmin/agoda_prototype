@@ -2,7 +2,8 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useListingsStore } from "@/src/features/listings/model/listings-store";
-import { restaurants } from "@/src/features/listings/lib/restaurants-data";
+import type { RestaurantItem } from "@/src/features/listings/model/listings-store";
+import { fetchRestaurants } from "@/src/features/listings/lib/restaurants-data";
 import { AppLanguage, useLanguage } from "@/src/shared/i18n/use-language";
 import { useSearchParams } from "next/navigation";
 import { ListIcon } from "@phosphor-icons/react";
@@ -73,6 +74,15 @@ export default function ContentArea({ className, onToggle }: Props) {
   const searchParams = useSearchParams();
   const lang = searchParams.get("lang");
   const { t, setLang } = useLanguage();
+  const [restaurants, setRestaurants] = useState<RestaurantItem[]>([]);
+
+  useEffect(() => {
+    async function loadRestaurants() {
+      const data = await fetchRestaurants();
+      setRestaurants(data);
+    }
+    loadRestaurants();
+  }, []);
 
   useEffect(() => {
     if (lang) {
@@ -83,7 +93,18 @@ export default function ContentArea({ className, onToggle }: Props) {
   const selected = useMemo(() => {
     if (!selectedMainId) return null;
     return restaurants.find((r) => r.id === selectedMainId) ?? null;
-  }, [selectedMainId]);
+  }, [selectedMainId, restaurants]);
+
+  // 서브 아이템이 선택된 경우 해당 주소를 사용
+  const mapQuery = useMemo(() => {
+    if (selectedSub && selected) {
+      const subItem = selected.subItems[selectedSub.index];
+      if (subItem?.address) {
+        return encodeURIComponent(subItem.address);
+      }
+    }
+    return selected?.mapQuery || "";
+  }, [selected, selectedSub]);
 
   if (!selected) {
     return (
@@ -125,9 +146,13 @@ export default function ContentArea({ className, onToggle }: Props) {
         </h2>
       </button>
       {showMap ? (
-        <GoogleMap query={selected.mapQuery} />
-      ) : (
+        <GoogleMap query={mapQuery} />
+      ) : selected.videoId ? (
         <YouTubePlayer videoId={selected.videoId} />
+      ) : (
+        <div className="w-full h-full grid place-items-center p-4 text-center">
+          <p className="text-sm text-gray-500">동영상 정보가 없습니다.</p>
+        </div>
       )}
     </section>
   );

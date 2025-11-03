@@ -1,8 +1,9 @@
 "use client";
 
-import { useMemo } from "react";
+import { useEffect, useState } from "react";
 import { useListingsStore } from "@/src/features/listings/model/listings-store";
-import { restaurants } from "@/src/features/listings/lib/restaurants-data";
+import type { RestaurantItem } from "@/src/features/listings/model/listings-store";
+import { fetchRestaurants } from "@/src/features/listings/lib/restaurants-data";
 import { CaretDownIcon, CaretUpIcon, ListIcon } from "@phosphor-icons/react";
 import Image from "next/image";
 import { useLanguage } from "@/src/shared/i18n/use-language";
@@ -27,14 +28,24 @@ export default function RestaurantList({
   } = useListingsStore();
 
   const { t } = useLanguage();
-  const items = useMemo(() => restaurants, []);
+  const [items, setItems] = useState<RestaurantItem[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const getSubCount = (id: string) => {
-    // deterministic: based on id char codes → 6 or 9 or 12
-    const sum = Array.from(id).reduce((acc, ch) => acc + ch.charCodeAt(0), 0);
-    const mod = sum % 3; // 0,1,2
-    return mod === 0 ? 6 : mod === 1 ? 9 : 12;
-  };
+  useEffect(() => {
+    async function loadRestaurants() {
+      setLoading(true);
+      try {
+        const data = await fetchRestaurants();
+        setItems(data);
+      } catch (error) {
+        console.error("Failed to load restaurants:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadRestaurants();
+  }, []);
 
   return (
     <aside
@@ -59,90 +70,102 @@ export default function RestaurantList({
       </button>
 
       <ul className="h-full overflow-auto divide-y divide-gray-200">
-        {items.map((item, idx) => {
-          const active = selectedMainId === item.id;
-          const expanded = Boolean(expandedById[item.id]);
-          const count = getSubCount(item.id);
-          return (
-            <li key={item.id} className="group">
-              <div
-                className={`flex items-center gap-2 px-3 h-14 ${
-                  active ? "bg-gray-50" : ""
-                }`}
-              >
-                <button
-                  type="button"
-                  onClick={() => {
-                    selectMain(item.id);
-                    onToggle();
-                  }}
-                  className="flex-1 text-left flex items-center gap-2 cursor-pointer group"
+        {loading ? (
+          <li className="px-4 py-8 text-center text-gray-500">로딩 중...</li>
+        ) : items.length === 0 ? (
+          <li className="px-4 py-8 text-center text-gray-500">
+            데이터가 없습니다.
+          </li>
+        ) : (
+          items.map((item, idx) => {
+            const active = selectedMainId === item.id;
+            const expanded = Boolean(expandedById[item.id]);
+            const count = item.subItems.length;
+            return (
+              <li key={item.id} className="group">
+                <div
+                  className={`flex items-center gap-2 px-3 h-14 ${
+                    active ? "bg-gray-50" : ""
+                  }`}
                 >
-                  <span className="text-xs font-medium text-gray-500 w-4 text-center shrink-0">
-                    {idx + 1}
-                  </span>
-                  <Image
-                    src={
-                      item.icon === "youtube"
-                        ? "/YouTube.svg"
-                        : "/Youtube_shorts.svg"
-                    }
-                    alt="video icon"
-                    width={item.icon === "youtube" ? 20 : 18}
-                    height={item.icon === "youtube" ? 20 : 18}
-                  />
-                  <span className="text-sm font-bold group-hover:underline underline-offset-4 line-clamp-1">
-                    {item.name}
-                  </span>
-                  <span className="inline-flex items-center justify-center rounded-full text-amber-600 tracking-tight text-sm font-semibold">
-                    {count}
-                  </span>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => toggleExpanded(item.id)}
-                  aria-label={expanded ? "접기" : "펼치기"}
-                  className="text-xs px-2 py-1 rounded hover:ring ring-gray-400 hover:bg-gray-50 cursor-pointer"
-                >
-                  {expanded ? (
-                    <CaretUpIcon
-                      className="size-4 text-gray-800"
-                      weight="bold"
+                  <button
+                    type="button"
+                    onClick={() => {
+                      selectMain(item.id);
+                      onToggle();
+                    }}
+                    className="flex-1 text-left flex items-center gap-2 cursor-pointer group"
+                  >
+                    <span className="text-xs font-medium text-gray-500 w-4 text-center shrink-0">
+                      {idx + 1}
+                    </span>
+                    <Image
+                      src={
+                        item.icon === "youtube"
+                          ? "/YouTube.svg"
+                          : "/Youtube_shorts.svg"
+                      }
+                      alt="video icon"
+                      width={item.icon === "youtube" ? 20 : 18}
+                      height={item.icon === "youtube" ? 20 : 18}
                     />
-                  ) : (
-                    <CaretDownIcon
-                      className="size-4 text-gray-800"
-                      weight="bold"
-                    />
-                  )}
-                </button>
-              </div>
+                    <span className="text-sm font-bold group-hover:underline underline-offset-4 line-clamp-1">
+                      {item.name}
+                    </span>
+                    <span className="inline-flex items-center justify-center rounded-full text-amber-600 tracking-tight text-sm font-semibold">
+                      {count}
+                    </span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => toggleExpanded(item.id)}
+                    aria-label={expanded ? "접기" : "펼치기"}
+                    className="text-xs px-2 py-1 rounded hover:ring ring-gray-400 hover:bg-gray-50 cursor-pointer"
+                  >
+                    {expanded ? (
+                      <CaretUpIcon
+                        className="size-4 text-gray-800"
+                        weight="bold"
+                      />
+                    ) : (
+                      <CaretDownIcon
+                        className="size-4 text-gray-800"
+                        weight="bold"
+                      />
+                    )}
+                  </button>
+                </div>
 
-              {expanded && (
-                <ul className="px-3 pb-3 space-y-2">
-                  {Array.from({ length: count }).map((_, idx) => (
-                    <li key={idx}>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          selectSub(item.id, idx);
-                          onToggle();
-                        }}
-                        className="w-full flex items-center gap-3 rounded border border-gray-400 p-3 bg-gray-50 hover:bg-gray-100 cursor-pointer group active:scale-95 transition-all duration-100 ease-in-out"
-                      >
-                        <div className="h-10 w-10 rounded-full bg-gray-200 animate-pulse" />
-                        <div className="flex-1 space-y-2">
-                          <div className="h-3 w-1/2 bg-gray-200 rounded animate-pulse" />
-                          <div className="h-3 w-1/3 bg-gray-200 rounded animate-pulse" />
-                        </div>
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </li>
-          );
-        })}
+                {expanded && count > 0 && (
+                  <ul className="px-3 pb-3 space-y-2">
+                    {item.subItems.map((subItem, subIdx) => (
+                      <li key={subIdx}>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            selectSub(item.id, subIdx);
+                            onToggle();
+                          }}
+                          className="w-full flex items-center gap-3 rounded border border-gray-400 p-3 bg-gray-50 hover:bg-gray-100 cursor-pointer group active:scale-95 transition-all duration-100 ease-in-out"
+                        >
+                          <div className="h-10 w-10 rounded-full bg-gray-200 shrink-0" />
+                          <div className="flex-1 flex flex-col space-y-1">
+                            <div className="text-sm font-semibold text-gray-900 text-left">
+                              {subItem.name}
+                            </div>
+                            <div className="text-xs text-gray-600 text-left">
+                              {subItem.address}
+                            </div>
+                          </div>
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            );
+          })
+        )}
       </ul>
       <div className="shrink-0 h-18 w-full flex items-center gap-3 px-4 border-t border-gray-200 select-none group">
         <Image

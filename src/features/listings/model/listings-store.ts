@@ -1,11 +1,17 @@
 import { create } from "zustand";
 
+export type RestaurantSubItem = {
+  name: string; // 상호
+  address: string; // 주소
+};
+
 export type RestaurantItem = {
   id: string;
   name: string;
   videoId: string; // YouTube video id
   mapQuery: string; // Google Maps embed place/query
   icon: "youtube" | "shorts"; // icon type
+  subItems: RestaurantSubItem[]; // 상호와 주소 리스트
 };
 
 type ListingsState = {

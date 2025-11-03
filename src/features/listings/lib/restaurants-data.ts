@@ -1,144 +1,24 @@
 import type { RestaurantItem } from "@/src/features/listings/model/listings-store";
 
-export const restaurants: RestaurantItem[] = [
-  {
-    id: "r1",
-    name: "Premium Sushi & Japanese Cuisine Experience",
-    videoId: "finLqF_e0qc",
-    mapQuery: "Fukuoka%20restaurants",
-    icon: "youtube",
-  },
-  {
-    id: "r2",
-    name: "Pasta Fresca",
-    videoId: "0II-qU0ADr4",
-    mapQuery: "Fukuoka%30restaurants",
-    icon: "youtube",
-  },
-  {
-    id: "r3",
-    name: "Authentic Mexican Street Food & Margarita Bar",
-    videoId: "b4dPKoTRVTM",
-    mapQuery: "Fukuoka%10restaurants",
-    icon: "youtube",
-  },
-  {
-    id: "r4",
-    name: "Traditional Indian Curry House & Spice Market",
-    videoId: "gxx1AIpzXNg",
-    mapQuery: "Fukuoka%25restaurants",
-    icon: "shorts",
-  },
-  {
-    id: "r5",
-    name: "Bistro Belle",
-    videoId: "cCNlKOnGuBY",
-    mapQuery: "Fukuoka%15restaurants",
-    icon: "youtube",
-  },
-  {
-    id: "r6",
-    name: "Burger Hub",
-    videoId: "f9Tx4hdn-aw",
-    mapQuery: "Fukuoka%20restaurants",
-    icon: "shorts",
-  },
-  {
-    id: "r7",
-    name: "Noodle Nest",
-    videoId: "1sQIR35maJo",
-    mapQuery: "Fukuoka%30restaurants",
-    icon: "youtube",
-  },
-  {
-    id: "r8",
-    name: "Mediterranean Tapas Bar & Wine Lounge",
-    videoId: "GqP6CmHrEZU",
-    mapQuery: "Fukuoka%10restaurants",
-    icon: "youtube",
-  },
-  {
-    id: "r9",
-    name: "BBQ Pit",
-    videoId: "Cp9BOPXofsc",
-    mapQuery: "Fukuoka%25restaurants",
-    icon: "shorts",
-  },
-  {
-    id: "r10",
-    name: "Pho Garden",
-    videoId: "nurVHIUMYUY",
-    mapQuery: "Fukuoka%35restaurants",
-    icon: "youtube",
-  },
-  {
-    id: "r11",
-    name: "Dim Sum Joy",
-    videoId: "wcjc7YTkWWI",
-    mapQuery: "Fukuoka%15restaurants",
-    icon: "youtube",
-  },
-  {
-    id: "r12",
-    name: "Kebab King",
-    videoId: "finLqF_e0qc",
-    mapQuery: "Fukuoka%20restaurants",
-    icon: "youtube",
-  },
-  {
-    id: "r13",
-    name: "Fresh Seafood Bay & Ocean View Restaurant",
-    videoId: "0II-qU0ADr4",
-    mapQuery: "Fukuoka%30restaurants",
-    icon: "youtube",
-  },
-  {
-    id: "r14",
-    name: "Steak Forge",
-    videoId: "DYtIgNmfBBw",
-    mapQuery: "Fukuoka%10restaurants",
-    icon: "shorts",
-  },
-  {
-    id: "r15",
-    name: "Vegan Vibes",
-    videoId: "finLqF_e0qc",
-    mapQuery: "Fukuoka%25restaurants",
-    icon: "youtube",
-  },
-  {
-    id: "r16",
-    name: "Ramen Lab",
-    videoId: "1sQIR35maJo",
-    mapQuery: "Fukuoka%35restaurants",
-    icon: "youtube",
-  },
-  {
-    id: "r17",
-    name: "Authentic Spanish Paella & Iberian Cuisine",
-    videoId: "R8Y0B49saOg",
-    mapQuery: "Fukuoka%15restaurants",
-    icon: "youtube",
-  },
-  {
-    id: "r18",
-    name: "Goulash Haus",
-    videoId: "RF1fqlIzay0",
-    mapQuery: "Fukuoka%20restaurants",
-    icon: "youtube",
-  },
-  {
-    id: "r19",
-    name: "Pierogi Point",
-    videoId: "tgOLRY0BPCg",
-    mapQuery: "Fukuoka%30restaurants",
-    icon: "youtube",
-  },
-  {
-    id: "r20",
-    name: "Coastal Peruvian Ceviche & Pisco Bar",
-    videoId: "KLaIjpC1Uc0",
-    mapQuery: "Fukuoka%10restaurants",
-    icon: "shorts",
-  },
-];
+/**
+ * Google 스프레드시트에서 레스토랑 데이터를 가져옵니다.
+ * @returns RestaurantItem 배열
+ */
+export async function fetchRestaurants(): Promise<RestaurantItem[]> {
+  try {
+    const response = await fetch("/api/restaurants", {
+      cache: "no-store", // 실시간 데이터를 위해 캐시 비활성화
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch restaurants: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching restaurants:", error);
+    // 에러 발생 시 빈 배열 반환
+    return [];
+  }
+}
